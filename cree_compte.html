@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-6 col-lg-4">
+        <div class="card shadow-sm mt-5">
+            <div class="card-body p-4">
+                <h2 class="text-center mb-4">Créer un compte</h2>
+                
+                {% if error %}
+                    <div class="alert alert-danger" role="alert">
+                        {{ error }}
+                    </div>
+                {% endif %}
+
+                <form action="/inscription" method="POST">
+                    <div class="mb-3">
+                        <label for="nom" class="form-label">Nom d'utilisateur</label>
+                        <input type="text" name="nom_utilisateur" id="nom" class="form-control" placeholder="Choisissez un pseudo" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="mdp" class="form-label">Mot de passe</label>
+                        <input type="password" name="mot_de_passe_k" id="mdp" class="form-control" placeholder="Mot de passe sécurisé" required>
+                    </div>
+
+                    <div class="d-grid gap-2 mt-4">
+                        <button type="submit" class="btn btn-primary">S'inscrire</button>
+                    </div>
+                </form>
+
+                <hr class="my-4">
+
+                <p class="text-center mb-0">
+                    Déjà un compte ? <a href="/connexion">Connectez-vous ici</a>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

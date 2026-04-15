@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block content %}
+<h2 class="mb-4 text-center">📚 LA BOÎTE À LIVRES </h2>
+<div class="row">
+    {% for boite in boites %}
+    <div class="col-md-4 mb-4">
+        <div class="card h-100 shadow-sm border-0">
+            <div class="card-header fw-bold text-center
+                {% if boite.remplissage == 'Pleine' %}bg-danger text-white
+                {% elif boite.remplissage == 'Vide' %}bg-warning text-dark
+                {% elif boite.remplissage == 'Optimale' %}bg-success text-white
+                {% else %}bg-secondary text-white{% endif %}"> {{ boite.remplissage or 'État inconnu' }}
+            </div>
+            
+            <div class="card-body">
+                <h5 class="card-title text-primary">{{ boite.nom_lieu }}</h5>
+                <p class="card-text text-muted" style="font-size: 0.9rem;">
+                    {{ boite.description|truncate(100) }}
+                </p>
+            </div>
+            <div class="card-footer bg-white border-0 pb-3">
+                <a href="/boite/{{ boite.id }}" class="btn btn-outline-primary w-100">Voir détails</a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

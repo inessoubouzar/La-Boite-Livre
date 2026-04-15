@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <div class="card shadow border-0">
+            <div class="card-header bg-dark text-white p-3">
+                <h4 class="mb-0 text-center">📢 Signaler l'état</h4>
+            </div>
+            
+            <div class="card-body p-4">
+                <p class="text-muted text-center mb-4">
+                    Aidez nous en indiquant l'état actuel de cette boîte.
+                </p>
+
+                <form action="/boite/{{ boite.id }}/signalement" method="POST">
+                    
+                    <div class="mb-4">
+                        <label for="remplissage" class="form-label fw-bold">Remplissage :</label>
+                        <select name="remplissage" id="remplissage" class="form-select form-select-lg" required>
+                            <option value="" selected disabled>Comment est la boîte ?</option>
+                            <option value="Vide">⚠️ Elle est vide (besoin de livres)</option>
+                            <option value="Optimale">✅ Il y a de la place</option>
+                            <option value="Pleine">🚫 Elle déborde !</option>
+                        </select>
+                    </div>
+
+                    <div class="mb-4">
+                        <label for="etat_livres" class="form-label fw-bold">Qualité des livres :</label>
+                        <select name="etat_livres" id="etat_livres" class="form-select form-select-lg" required>
+                            <option value="" selected disabled>Dans quel état sont-ils ?</option>
+                            <option value="Bon état">📚 Bon état (propres et lisibles)</option>
+                            <option value="Abîmés">❌ Abîmés (humides ou déchirés)</option>
+                            <option value="Rien">⚠️ Rien à signaler</option>
+                        </select>
+                    </div>
+
+                    <hr class="my-4">
+
+                    <div class="d-grid gap-2">
+                        <button type="submit" class="btn btn-primary btn-lg">Confirmer le signalement</button>
+                        <a href="/boite/{{ boite.id }}" class="btn btn-link text-muted">Retour à la fiche</a>
+                    </div>
+                </form>
+            </div>
+
+            <div class="card-footer bg-light text-center small">
+                Contributeur : <strong>{{ session.get('nom_utilisateur') }}</strong> 
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
